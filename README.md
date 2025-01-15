@@ -35,8 +35,8 @@ Follow the steps below to clone, build, and deploy the project.
 To clone the repository, run the following commands in your terminal:
 
 ```bash
-git clone https://github.com/raksha-bv/icrc_wallet.git
-cd icrc_wallet
+git clone https://github.com/raksha-bv/icp_wallet.git
+cd icp_wallet
 ```
 
 ### Building the Project
