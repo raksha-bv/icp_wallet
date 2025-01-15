@@ -1,72 +1,110 @@
-# `ICP WALLET`
+# ICRC Wallet
 
-The provided Rust code for the ICP wallet is ready for deployment on a local Internet Computer (ICP) testnet and contains the following features:
+The **ICRC Wallet** is a project implemented in Rust, designed to interact with the Internet Computer's ICRC standard for token management. This repository contains the `Cargo.toml` configuration, the source code, and instructions to clone, build, and deploy the project.
 
-Key Features:
-Token Wallet Functionality:
+## Table of Contents
 
-Balance Management: Uses a thread-local HashMap to store balances for accounts.
-Deposit Notifications: Updates balances based on incoming deposits.
-Transfers: Allows transferring tokens between accounts with checks for sufficient balance.
-Query for Balance: Retrieve the current balance of a specified account.
-Testing Framework:
+- [Features](#features)
+- [Prerequisites](#prerequisites)
+- [Getting Started](#getting-started)
+- [Configuration](#configuration)
+- [Contributing](#contributing)
+- [License](#license)
 
-Unit tests ensure proper functionality of key features like deposit, balance retrieval, and transfers (success and failure scenarios).
-Uses a mock runtime for testing the caller's identity.
-Integration with ICP Canister Development:
+## Features
 
-Uses candid for serialization and ic-cdk macros to define update and query methods.
-Exports a Candid interface for frontend integration.
-Documentation Recommendations:
+- Implements the ICRC token standard
+- Uses the Internet Computer (IC) SDK for deployment
+- Provides serialization and deserialization with Serde
+- Includes necessary dependencies for seamless integration with IC services
 
-Documentation outlines steps for running the project locally, using commands such as dfx start and dfx deploy.
-Mentions tools like npm start for frontend integration and proxying API requests.
-Deployment Steps:
+## Prerequisites
 
-1. Setup ICP Development Environment:
-   Install the DFINITY SDK: Follow this guide.
-   Create a project directory:
-   bash
-   Copy code
-   dfx new icp_wallet
-   cd icp_wallet
-2. Add the Rust Code:
-   Replace the default Rust code in the src folder of your canister with the provided code. Update Cargo.toml to include the dependencies:
+Ensure you have the following installed before starting:
 
-toml
-Copy code
+- **Rust** and **Cargo**: Install via the [Rust official website](https://www.rust-lang.org/tools/install)
+- **DFX** (The Internet Computer SDK): Install via the IC Developer Documentation
+- **Git**: Install via [Git Downloads](https://git-scm.com/downloads)
+
+## Getting Started
+
+Follow the steps below to clone, build, and deploy the project.
+
+### Cloning the Repository
+
+To clone the repository, run the following commands in your terminal:
+
+```bash
+git clone https://github.com/your-username/icrc_wallet.git
+cd icrc_wallet
+```
+
+### Building the Project
+
+Build the project using Cargo:
+
+```bash
+cargo build
+```
+
+### Deploying the Canister
+
+Deploy the canister to the Internet Computer using DFX:
+
+1. Start the local DFX replica:
+   ```bash
+   dfx start --background
+   ```
+
+2. Deploy the canister:
+   ```bash
+   dfx deploy
+   ```
+
+### Interacting with the Canister
+
+Once deployed, you can interact with the canister using DFX commands or a frontend interface.
+
+## Configuration
+
+The project uses the following `Cargo.toml` configuration:
+
+```toml
+[package]
+name = "icrc_wallet"
+version = "0.1.0"
+edition = "2021"
+
 [dependencies]
-candid = "0.7"
-ic-cdk = "0.6"
-ic-cdk-macros = "0.6"
+candid = "0.9.9"
+ic-cdk = "0.11.1"
+ic-cdk-macros = "0.8.1"
+icrc-ledger-types = "0.1.1"
 serde = { version = "1.0", features = ["derive"] }
-tokio = { version = "1", features = ["full"] } 3. Start the Local Replica and Deploy:
-Run the following commands:
 
-bash
-Copy code
+[lib]
+crate-type = ["cdylib"]
+```
 
-# Start the local replica
+## Contributing
 
-dfx start --background
+We welcome contributions! Please follow these steps:
 
-# Deploy the canister
+1. Fork the repository
+2. Create a new branch:
+   ```bash
+   git checkout -b feature-name
+   ```
+3. Make your changes and commit them:
+   ```bash
+   git commit -m "Add new feature: feature-name"
+   ```
+4. Push to your branch:
+   ```bash
+   git push origin feature-name
+   ```
+5. Create a pull request
 
-dfx deploy 4. Testing:
-Use cargo test to run the provided unit tests.
-Add integration tests if necessary for deployment scenarios. 5. Frontend Integration:
-Export the Candid interface:
-bash
-Copy code
-dfx generate
-Use the generated declarations for frontend interaction. 6. Host Documentation:
-Use GitHub to host the project. Create a README file with deployment instructions, code explanations, and usage examples.
-Additional Recommendations:
-Security Enhancements:
-Add authentication mechanisms to restrict who can call update methods like add_test_balance in production.
-Use subaccounts for better account management in complex use cases.
-Error Handling:
-Improve error messaging and logging for easier debugging.
-Scalability:
-Implement pagination or optimized data structures if the HashMap grows significantly.
-The project is well-structured and includes all necessary components for a deployable and testable ICP wallet. Let me know if you'd like further assistance with any specific part!
+## License
+
+This project is licensed under the MIT License. Feel free to use it as you wish!
