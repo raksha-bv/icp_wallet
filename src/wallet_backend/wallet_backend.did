@@ -1,0 +1,22 @@
+type Account = record {
+    owner : principal;
+    subaccount : opt vec nat8;
+};
+
+type BalanceArgs = record {
+    account : Account;
+};
+
+type TransferArgs = record {
+    amount : nat;
+    to_account : Account;
+};
+
+type BlockIndex = nat;
+
+service : {
+    "balance": (BalanceArgs) -> (nat) query;
+    "transfer": (TransferArgs) -> (variant { Ok: BlockIndex; Err: text; });
+    "deposit_notification": (principal, nat) -> (variant { Ok; Err: text; });
+    "add_test_balance": (Account, nat) -> (variant { Ok; Err: text; });
+}

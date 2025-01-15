@@ -1,0 +1,16 @@
+{
+  "name": "rust_hello",
+  "type": "module",
+  "scripts": {
+    "start": "npm start ",
+    "prebuild": "npm run prebuild ",
+    "build": "npm run build ",
+    "pretest": "npm run prebuild ",
+    "test": "npm test "
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=7.0.0"
+  },
+  "workspaces": []
+}
